@@ -1,32 +1,47 @@
-import {scream, decimals, asAbbreviation} from './decorators';
+import {scream, asAbbreviation, asDays} from './decorators';
 import {Gender} from './enums'
-
+import {Birthdate} from "./birthdate";
 
 export class Person {
     firstName: string;
-    lastName: string
-    age: number;
+    lastName: string;
+    dob: Birthdate;
     gender: Gender;
 
-    constructor(firstName: string, lastName: string, age: number, gender: Gender) {
+    constructor(firstName: string, lastName: string, dob: Birthdate, gender: Gender) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.age = age;
+        this.dob = dob;
         this.gender = gender;
     }
 
     @scream
-    getFullName() {
+    getFullName(): string {
         return `${this.firstName} ${this.lastName}`;
     }
 
-    @decimals(3)
-    getAge() {
-        return this.age;
+    getDob(): Birthdate{
+        return this.dob;
+    }
+
+    @asDays
+    getAge(): number {
+        return this.calculateAge();
     }
 
     @asAbbreviation
-    getGender() {
+    getGender(): any{
         return this.gender;
+    }
+
+    calculateAge(): number {
+        const dob = new Date(`${this.dob.year}-${this.dob.month}-${this.dob.day}`);
+        const today = new Date();
+        let age = today.getFullYear() - dob.getFullYear();
+        const m = today.getMonth() - dob.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+            age--;
+        }
+        return age;
     }
 }

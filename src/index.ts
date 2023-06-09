@@ -1,6 +1,8 @@
 import {Person} from './person'
 import {Gender} from './enums'
-const person = new Person('Bob', 'Reselman', 69, Gender.MALE);
+import {Birthdate} from "./birthdate";
+const dob = new Birthdate(10,1,1,);
+const person = new Person('Bob', 'Reselman', dob, Gender.MALE);
 
 console.log(person.getFullName())
 

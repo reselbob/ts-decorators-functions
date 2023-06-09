@@ -1,4 +1,3 @@
-import "reflect-metadata";
 import {Gender} from './enums'
 
 export const scream = (target: any, memberName: string, descriptor: PropertyDescriptor) => {
@@ -9,13 +8,11 @@ export const scream = (target: any, memberName: string, descriptor: PropertyDesc
     };
 }
 
-export const decimals = (decimalPlaces: number) => {
-    return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
-        const originalMethod = descriptor.value;
-        descriptor.value = function (...args: any[]) {
-            const result = originalMethod.apply(this, args);
-            return parseFloat(result).toFixed(decimalPlaces);
-        };
+export const asDays = (target: any, memberName: string, descriptor: PropertyDescriptor) => {
+    const originalMethod = descriptor.value;
+    descriptor.value = function (...args: any[]) {
+        const result = originalMethod.apply(this, args);
+        return result * 365;
     };
 }
 
