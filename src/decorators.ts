@@ -33,20 +33,6 @@ export const asAbbreviation = (target: any, memberName: string, descriptor: Prop
     };
 }
 
-/*
-export const log = (): Function => {
-    return function (target: Function, propertyKey: string, descriptor: PropertyDescriptor) {
-        const originalMethod = descriptor.value;
-        descriptor.value = function (...args: any[]) {
-            console.log(`Calling ${propertyKey}`);
-            const result = originalMethod.apply(this, args);
-            console.log(`${propertyKey} returned: ${JSON.stringify(result)}`);
-            return result;
-        };
-    };
-};
-*/
-
 export const log = (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
     const originalMethod = descriptor.value;
     descriptor.value = function (...args: any[]) {
