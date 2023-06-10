@@ -44,10 +44,10 @@ const getRandomDob = () => {
     const day = getDaysInMonth(month);
     return new Birthdate(year, month,day );
 }
-describe('Hello World with Joke Activity Tests', () => {
+describe('Decorator Tests', () => {
     before(async () => {
         // tslint:disable-next-line:no-console
-        console.log(' Starting tests');
+        //console.log(' Starting tests');
     });
 
     it('Testing Scream', async () => {
@@ -56,9 +56,8 @@ describe('Hello World with Joke Activity Tests', () => {
         const gender = Math.floor(Math.random() * 3) as Gender;
         const dob  = getRandomDob();
         const person  = new Person(fName,lName, dob, gender)
-
-        expect(person.getFullName()).to.eq(`${fName.toUpperCase()} ${lName.toUpperCase()}`)
-
+        const result  = person.getFullName()
+        expect(result).to.contains(`${fName.toUpperCase()} ${lName.toUpperCase()}`);
     });
 
     it('Testing Gender', async () => {
@@ -69,7 +68,8 @@ describe('Hello World with Joke Activity Tests', () => {
         const dob  = getRandomDob();
 
         const person  = new Person(fName,lName, dob, gender)
-        expect(typeof person.getGender()).to.be.a('string');
+        const result = person.getGender()
+        expect(result.length).to.eq(1)
     });
 
     it('Testing Age', async () => {
@@ -82,5 +82,18 @@ describe('Hello World with Joke Activity Tests', () => {
         const person  = new Person(fName,lName, dob, gender)
         const result = person.getAge();
         expect(result).to.be.greaterThan(100);
+    });
+
+    it('Testing DOB', async () => {
+        const fName = faker.name.firstName();
+        const lName = faker.name.lastName();
+        const gender = Math.floor(Math.random() * 3) as Gender;
+        const dob  = getRandomDob();
+
+        const person  = new Person(fName,lName, dob, gender)
+        const result = person.getDob();
+        expect(dob.day).to.eq(result.day);
+        expect(dob.month).to.eq(result.month);
+        expect(dob.year).to.eq(result.year);
     });
 })

@@ -1,4 +1,4 @@
-import {scream, asAbbreviation, asDays} from './decorators';
+import {scream, asAbbreviation, asDays, log} from './decorators';
 import {Gender} from './enums'
 import {Birthdate} from "./birthdate";
 
@@ -15,20 +15,24 @@ export class Person {
         this.gender = gender;
     }
 
-    @scream
+    @log
+    @scream('HEY!')
     getFullName(): string {
         return `${this.firstName} ${this.lastName}`;
     }
 
+    @log
     getDob(): Birthdate{
         return this.dob;
     }
 
+    @log
     @asDays
     getAge(): number {
         return this.calculateAge();
     }
 
+    @log
     @asAbbreviation
     getGender(): any{
         return this.gender;

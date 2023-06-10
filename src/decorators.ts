@@ -1,10 +1,12 @@
 import {Gender} from './enums'
 
-export const scream = (target: any, memberName: string, descriptor: PropertyDescriptor) => {
-    const originalMethod = descriptor.value;
-    descriptor.value = function (...args: any[]) {
-        const result = originalMethod.apply(this, args);
-        return result.toUpperCase();
+export function scream(prefix: string): Function {
+    return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+        const originalMethod = descriptor.value;
+        descriptor.value = function (...args: any[]) {
+            const result = originalMethod.apply(this, args);
+            return `${prefix} ${result.toUpperCase()}`;
+        };
     };
 }
 
@@ -20,7 +22,7 @@ export const asAbbreviation = (target: any, memberName: string, descriptor: Prop
     const originalMethod = descriptor.value;
     descriptor.value = function (...args: any[]) {
         const result = originalMethod.apply(this, args);
-        switch (result){
+        switch (result) {
             case Gender.MALE:
                 return 'M';
             case Gender.FEMALE:
@@ -30,4 +32,29 @@ export const asAbbreviation = (target: any, memberName: string, descriptor: Prop
         }
     };
 }
+
+/*
+export const log = (): Function => {
+    return function (target: Function, propertyKey: string, descriptor: PropertyDescriptor) {
+        const originalMethod = descriptor.value;
+        descriptor.value = function (...args: any[]) {
+            console.log(`Calling ${propertyKey}`);
+            const result = originalMethod.apply(this, args);
+            console.log(`${propertyKey} returned: ${JSON.stringify(result)}`);
+            return result;
+        };
+    };
+};
+*/
+
+export const log = (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
+    const originalMethod = descriptor.value;
+    descriptor.value = function (...args: any[]) {
+        console.log(`Calling ${propertyKey}`);
+        const result = originalMethod.apply(this, args);
+        console.log(`${propertyKey} returned: ${JSON.stringify(result)}`);
+        return result;
+    };
+    return descriptor;
+};
 
