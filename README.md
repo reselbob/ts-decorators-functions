@@ -11,12 +11,15 @@ This introductory project shows you how to create and use a simple TypeScript me
 
 ## Use
 
-`npm test`
+You can exercise the decorator the running the following command;
+
+`ts-node src/index.ts`
+
+This is the 
 
 You'll get the following output:
 
 ```text
-  Decorator Tests
 Logger says - calling the method: print, that has a parameter value: Decorators are cool!
 Printer class is printing: Decorators are cool!
 Logger says - called the method: print
