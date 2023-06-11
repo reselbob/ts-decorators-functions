@@ -1,5 +1,5 @@
 /***************************************
- * This is a method decorator that adds before
+ * @description This is a method decorator that adds before
  * and after logging behavior to a decorated method
  * @param target, the class the contains the decorated method
  * @param propertyKey, the name of the decorated method
