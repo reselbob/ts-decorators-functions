@@ -55,6 +55,16 @@ describe('Decorator Tests', () => {
         expect(result).to.contains(`${fName.toUpperCase()} ${lName.toUpperCase()}`);
     });
 
+    it('Testing MakeAllCaps', async () => {
+        const fName = faker.name.firstName();
+        const lName = faker.name.lastName();
+        const gender = Math.floor(Math.random() * 3) as Gender;
+        const dob  = getRandomDob();
+        const person  = new Person(fName,lName, dob, gender)
+        const result  = person.getFullName()
+        expect(result).to.contains(`${fName.toUpperCase()} ${lName.toUpperCase()}`);
+    });
+
     it('Testing Gender', async () => {
         const fName = faker.name.firstName();
         const lName = faker.name.lastName();
@@ -95,5 +105,16 @@ describe('Decorator Tests', () => {
     it('Testing Printer', async () => {
         const printer = new Printer();
         printer.print('Decorators are cool!');
+    });
+
+    it('Testing allCaps', async () => {
+        const fName = faker.name.firstName();
+        const lName = faker.name.lastName();
+        const gender = Math.floor(Math.random() * 3) as Gender;
+        const dob  = getRandomDob();
+
+        const person  = new Person(fName,lName, dob, gender)
+        const result = person.getDescription();
+        console.log(result);
     });
 })

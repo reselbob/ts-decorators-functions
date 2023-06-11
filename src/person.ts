@@ -1,8 +1,8 @@
-import {scream, asAbbreviation, asDays, log} from './decorators';
+import {scream, asAbbreviation, asDays, log, allCaps} from './decorators';
 import {Gender} from './enums'
 import {Birthdate} from "./birthdate";
 
-interface IPrintable{
+interface IPrintable {
     print: Function;
 }
 
@@ -20,6 +20,7 @@ export class Person {
         this.gender = gender;
     }
 
+
     @log
     @scream('HEY!')
     getFullName(): string {
@@ -27,8 +28,12 @@ export class Person {
     }
 
     @log
-    getDob(): Birthdate{
+    getDob(): Birthdate {
         return this.dob;
+    }
+    @allCaps
+    getDescription(){
+        return 'Not Implemented';
     }
 
     @log
@@ -39,7 +44,7 @@ export class Person {
 
     @log
     @asAbbreviation
-    getGender(): any{
+    getGender(): any {
         return this.gender;
     }
 

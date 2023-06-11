@@ -1,5 +1,13 @@
 import {Gender} from './enums'
 
+export const allCaps = (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
+    const originalMethod = descriptor.value;
+    descriptor.value = function (...args: any[]) {
+        const result = originalMethod.apply(this, args);
+        return `${result.toUpperCase()}`;
+    };
+}
+
 export function scream(prefix: string): Function {
     return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
         const originalMethod = descriptor.value;
@@ -55,10 +63,9 @@ export const log = (target: any, propertyKey: string, descriptor: PropertyDescri
         // The decorated method's parameters will be passed in as args.
         // We'll assume the decorated method might only have a single parameter,
         // check to see if it's been passed in the method
-        if(args[0]){
+        if (args[0]) {
             msg = (`${propertyKey}, that has a parameter value: ${args[0]}`)
-        }
-        else{
+        } else {
             msg = `${propertyKey}`
         }
         // Emit a message to the console
@@ -68,10 +75,9 @@ export const log = (target: any, propertyKey: string, descriptor: PropertyDescri
         const result = originalMethod.apply(this, args);
         // if the decorated method returned a value when executed,
         // capture that result
-        if(result){
+        if (result) {
             msg = `${propertyKey} and returned: ${JSON.stringify(result)}`;
-        }
-        else{
+        } else {
             msg = `${propertyKey}`;
         }
         // Having executed the decorated method's behavior, emit
