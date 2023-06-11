@@ -10,9 +10,6 @@
     "test": "mocha --require ts-node/register tests/**/*.ts"
   },
   "dependencies": {
-    "dotenv": "^16.0.2",
-    "intl": "^1.2.5",
-    "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
     "@faker-js/faker": "^7.4.0",

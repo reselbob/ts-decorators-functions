@@ -2,6 +2,11 @@ import {scream, asAbbreviation, asDays, log} from './decorators';
 import {Gender} from './enums'
 import {Birthdate} from "./birthdate";
 
+interface IPrintable{
+    print: Function;
+}
+
+
 export class Person {
     firstName: string;
     lastName: string;

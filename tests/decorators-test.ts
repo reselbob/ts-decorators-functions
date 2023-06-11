@@ -3,8 +3,8 @@ import {before, describe, it} from 'mocha';
 import { faker } from '@faker-js/faker';
 import {Person} from '../src/person'
 import {Gender} from '../src/enums'
-import {get, random} from 'lodash';
 import {Birthdate} from "../src/birthdate";
+import {Printer} from '../src/printer'
 
 
 const getRandomNumber = (min: number, max: number) => {
@@ -45,11 +45,6 @@ const getRandomDob = () => {
     return new Birthdate(year, month,day );
 }
 describe('Decorator Tests', () => {
-    before(async () => {
-        // tslint:disable-next-line:no-console
-        //console.log(' Starting tests');
-    });
-
     it('Testing Scream', async () => {
         const fName = faker.name.firstName();
         const lName = faker.name.lastName();
@@ -95,5 +90,10 @@ describe('Decorator Tests', () => {
         expect(dob.day).to.eq(result.day);
         expect(dob.month).to.eq(result.month);
         expect(dob.year).to.eq(result.year);
+    });
+
+    it('Testing Printer', async () => {
+        const printer = new Printer();
+        printer.print('Decorators are cool!');
     });
 })
